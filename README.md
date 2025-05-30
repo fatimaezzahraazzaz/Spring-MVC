@@ -115,13 +115,16 @@ Formulaire centralisé permettant de :
 - Créer un nouveau patient (sans champ ID visible)
 
 - Modifier un patient existant (ID caché dans un champ hidden et affiché en label)
-
-- Champs du formulaire :
-
+  
 - Affichage des messages d’erreur de validation sous chaque champ via th:errors
 
 - Bouton “Save” pour soumettre le formulaire au backend
+  - image Formulaire d'ajout:
 ![image](https://github.com/user-attachments/assets/ae52d473-eb0f-485a-a856-e0084db4de92)
+
+  - image formulaire de modification :
+    ![image](https://github.com/user-attachments/assets/ac4abfa3-cde4-4963-87cf-d1888f12ce84)
+
 
 ## 4. Fonctionnalités implémentées
 - Affichage dynamique des données patients depuis le backend via Spring MVC
