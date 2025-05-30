@@ -180,3 +180,51 @@ Ce projet est une application web de gestion des patients construite avec Spring
 - Liste Patient pour User :
 ![image](https://github.com/user-attachments/assets/1953d9af-adb7-44a2-b982-a92c28d16be8)
 
+# Authentification JDBC avec base de données MySQL:
+Dans cette partie, nous avons remplacé l’authentification en mémoire par une authentification via JDBC. Les utilisateurs et leurs rôles sont désormais enregistrés dans une base de données MySQL grâce au bean JdbcUserDetailsManager.
+## 1. Configuration de Spring Security avec JDBC:
+- JdbcUserDetailsManager est une implémentation de UserDetailsManager qui lit les utilisateurs depuis la base de données.
+
+- Il s'appuie sur deux tables : users et authorities (standard JDBC schema de Spring Security).
+
+- DataSource est automatiquement injecté par Spring à partir des propriétés de configuration (spring.datasource.url, etc.).
+ ## 2. Structure de la base de données (schema.sql):
+ -, users : stocke le login, mot de passe encodé, et si l’utilisateur est activé (enabled).
+
+- authorities : contient les rôles associés à chaque utilisateur (ROLE_USER, ROLE_ADMIN...).
+
+- Ce schéma est attendu par défaut par JdbcUserDetailsManager.
+
+## 3.Sécurité avec SecurityFilterChain :
+- authorizeHttpRequests : toute requête doit être authentifiée, sauf /webjars/**.
+
+- formLogin().loginPage("/login") : remplace le formulaire par défaut par un formulaire personnalisé.
+
+- accessDeniedPage("/notAuthorized") : page affichée si un utilisateur authentifié mais non autorisé tente d’accéder à une ressource.
+ ## 4. Création des utilisateurs automatiquement
+- Ce CommandLineRunner s’exécute au démarrage de l’application.
+
+- Il vérifie si les utilisateurs existent via userExists.
+
+- S’ils n’existent pas, ils sont créés dans la base avec un mot de passe BCrypté.
+
+- Les utilisateurs sont associés à des rôles via la table authorities.
+
+  ### Table user :
+  ![image](https://github.com/user-attachments/assets/fe6b41e1-6d27-49ad-99d3-ce4ec84df7ba)
+
+  ### Table authoritize :
+  ![image](https://github.com/user-attachments/assets/bb8bae13-df2a-466b-8cfd-6c5429aaed0d)
+
+  ### Authentification avec Admin2 :
+  ![image](https://github.com/user-attachments/assets/8df370f4-df80-4d4a-abd6-9b22d04ee292)
+
+  ### Authentification avec user11 :
+
+  ![image](https://github.com/user-attachments/assets/a47887e1-45bf-490f-b1f0-6227fdd8bbc5)
+
+
+
+
+
+
