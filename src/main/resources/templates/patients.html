@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:tn="http://www.thymeleaf.org">
+<html lang="en" xmlns:tn="http://www.thymeleaf.org"
+                xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+                layout:decorate="template1">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -8,14 +10,15 @@
     <link rel="stylesheet" href="/webjars/bootstrap-icons/1.10.3/font/bootstrap-icons.css">
 </head>
 <body>
+    <div layout:fragment="content1">
     <div class="p-3">
         <div class="card">
             <div class="card-header">Liste Patients</div>
             <div class="card-body">
 
                 <form method="get" th:action="@{index}">
-                    <label>Keyword</label>
-                    <input type="text" name="Keyword" th:value="${Keyword}">
+                    <label>keyword</label>
+                    <input type="text" name="keyword" th:value="${keyword}">
                     <button type="submit" class="btn btn-info">
                         <i class="bi bi-search"></i>
                     </button>
@@ -34,8 +37,14 @@
                         <td th:text="${p.score}"></td>
                         <td>
                             <a onclick="javascript:return confirm('Etes vouz sure?')"
-                               th:href="@{delete(id=${p.id}, Keyword=${keyword},page=${currentPage})}" class="btn btn-danger">
+                               th:href="@{delete(id=${p.id}, keyword=${keyword},page=${currentPage})}" class="btn btn-danger">
                                 <i class="bi bi-trash"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a
+                                th:href="@{editPatient(id=${p.id},keyword=${keyword},page=${currentPage})}" class="btn btn-success">
+                                <i class="bi bi-pencil-square"></i>
                             </a>
                         </td>
                     </tr>
@@ -45,7 +54,7 @@
                 <ul class="nav nav-pills">
                     <li th:each="page,status:${pages}">
 
-                        <a th:href="@{/index(page=${status.index},Keyword=${Keyword})}"
+                        <a th:href="@{/index(page=${status.index},keyword=${keyword})}"
                            th:class="${currentPage==status.index?'btn btn-info ms-1':'btn btn-outline-info ms-1'}"
                            th:text="${1+status.index}"></a>
                     </li>
@@ -54,7 +63,7 @@
             </div>
          </div>
     </div>
-
+    </div>
 
 
 </body>
