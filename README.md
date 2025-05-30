@@ -136,7 +136,47 @@ Formulaire centralisé permettant de :
 - Suppression sécurisée avec popup de confirmation avant la suppression
 
 - Formulaire réutilisable pour création et modification avec validation affichée en temps réel
-
+  
 - Navigation claire grâce au template commun et à la navbar
 
+# Rapport -Partie 3
+## Description du projet
+Ce projet est une application web de gestion des patients construite avec Spring Boot 3.5.0, Spring Security, Thymeleaf, et Bootstrap. L’application permet à des utilisateurs ayant des rôles distincts (USER, ADMIN) de consulter ou gérer des informations sur des patients.
+
+## Fonctionnalités de sécurité
+## Authentification
+- Utilisateurs en mémoire (InMemoryUserDetailsManager)
+
+- Mots de passe encodés avec PasswordEncoder
+
+- Page de login personnalisée (/login)
+
+- Page d’erreur d’accès refusé (/notAuthorized)
+
+## Architecture du projet
+### security/SecurityConfig.java
+- Définit les rôles, les utilisateurs et le filtre de sécurité (SecurityFilterChain)
+
+- Gère les redirections vers /login et /notAuthorized
+
+### web/SecurityController.java
+- Contrôleur pour gérer les pages login et notAuthorized
+
+### web/PatientController.java
+- Gère l’affichage, l’ajout, la suppression et l’édition des patients
+
+- Accès contrôlé avec @PreAuthorize("hasRole('ROLE_ADMIN')") pour les actions admin
+##  Interfaces Thymeleaf
+- login.html : Formulaire d’authentification
+![image](https://github.com/user-attachments/assets/2bd5716f-cbb5-4f8c-8239-d27854bcdd0f)
+
+
+- notAuthorized.html : Affiché lors d’un accès non autorisé
+![image](https://github.com/user-attachments/assets/a8e4b4c2-4df8-455c-85cc-69ab91dd1cc5)
+
+- Liste Patient pour Admin :
+![image](https://github.com/user-attachments/assets/c4ca3318-ba81-4002-ab77-344aca17c4c2)
+
+- Liste Patient pour User :
+![image](https://github.com/user-attachments/assets/1953d9af-adb7-44a2-b982-a92c28d16be8)
 
