@@ -30,6 +30,7 @@ L’objectif de ce TP est de créer une application web JEE complète permettant
 ## Fonctionnalités développées
 ### 1. Affichage des patients
 Liste dynamique avec pagination de la base de données des patients. Les patients sont affichés sous forme de tableau HTML formaté avec Bootstrap.
+
 ![image](https://github.com/user-attachments/assets/31b7a0a6-fe6a-4126-9081-7e576d172cbf)
 
 ### 2. Pagination
@@ -71,7 +72,7 @@ Suppression d’un patient
 ![image](https://github.com/user-attachments/assets/c6570c01-c561-463b-92fc-047a7bce3c25)
 
 
-#Rapport – Partie 2:
+# Rapport – Partie 2:
 
 ## 1. Objectif
 Cette deuxième partie du projet consiste à implémenter l’interface utilisateur de l’application de gestion des patients à l’aide de Thymeleaf, un moteur de templates pour Spring MVC. Le but est de fournir des vues web fonctionnelles et ergonomiques pour :
