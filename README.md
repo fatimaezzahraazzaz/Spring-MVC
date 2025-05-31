@@ -1,9 +1,8 @@
 #  Rapport de TP – Partie 1
 ##  Réalisé par :
-- **Nom :** [Ton Nom]  
-- **Filière :** [Ta Filière]  
-- **Encadrant :** [Nom de l'enseignant]  
-- **Date :** Mai 2025  
+- **Nom :** FatimaEzzhara Azzaz 
+- **Filière :** SDIA
+
 
 ##  Objectif du TP
 
@@ -22,7 +21,7 @@ L’objectif de ce TP est de créer une application web JEE complète permettant
 | Bootstrap 5       | Mise en forme de l’interface       |
 | Maven             | Gestion des dépendances            |
 
-## 🧬 Modèle de données
+##  Modèle de données
 
 ![image](https://github.com/user-attachments/assets/3e2f33a5-7928-42d0-85eb-5d226dd95ad5)
 
@@ -299,7 +298,16 @@ Dans cette partie, nous avons remplacé l’authentification en mémoire par une
     ![image](https://github.com/user-attachments/assets/d273c83e-5747-4772-bfba-3a3cec01eb7b)
 
 
-    
+    ## Ajouter un role a User1 :
+    ![image](https://github.com/user-attachments/assets/b78a940e-6e0d-4d37-92ce-b7b91bd304bb)
+    ![image](https://github.com/user-attachments/assets/20d55929-542e-49ec-890a-14b192951e82)
+    ![image](https://github.com/user-attachments/assets/3dadf997-b531-40df-8247-aed872681ec0)
+    - user1 a maintenet le droit de supprimer ajouter ou modifier un user :
+      ![image](https://github.com/user-attachments/assets/a0bd7e72-7365-4cef-8778-b174c25bc67c)
+
+
+
+
 
 
 
