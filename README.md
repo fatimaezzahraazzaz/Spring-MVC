@@ -223,6 +223,91 @@ Dans cette partie, nous avons remplacé l’authentification en mémoire par une
 
   ![image](https://github.com/user-attachments/assets/a47887e1-45bf-490f-b1f0-6227fdd8bbc5)
 
+  # UserDetails Service:
+  ## 1. Modèles d’Entités
+  ### a) AppRole :
+  - Cette entité représente un rôle de sécurité dans l’application (ex : USER, ADMIN).
+
+  - Le rôle est identifié par une chaîne de caractères unique (role).
+  ### b) AppUser:
+  - Cette entité représente un utilisateur de l’application.
+
+  - Chaque utilisateur a un identifiant unique userId (généré par UUID).
+
+   - Un utilisateur possède un nom d’utilisateur, un mot de passe (hashé), un email et une liste de rôles (relation ManyToMany).
+
+  - Le chargement des rôles est éager (EAGER), ce qui signifie que les rôles sont automatiquement chargés avec l'utilisateur.
+   ## 2. Service Métier - Gestion des Utilisateurs et Rôles
+   ### Interface AccountService :
+   - Cette interface définit les opérations principales pour la gestion des utilisateurs et rôles.
+
+   - Ajout d’utilisateur et de rôle, affectation et retrait de rôle, récupération d’un utilisateur.
+  ### Implémentation AccountServiceImpl:
+  -   Ajout d’un nouvel utilisateur : vérifie que le nom d’utilisateur n’existe pas déjà et que les mots de passe correspondent, encode le mot de     passe avec PasswordEncoder, puis sauvegarde l’utilisateur.
+
+   - Ajout d’un nouveau rôle : vérifie l’existence avant d’enregistrer un nouveau rôle.
+
+  - Gestion des rôles des utilisateurs : ajoute ou retire un rôle d’un utilisateur existant.
+
+  - Chargement d’un utilisateur : récupère un utilisateur via son nom.
+
+  - Le service est annoté avec @Transactional pour gérer les transactions automatiquement et @Service pour que Spring le détecte comme bean.
+    ## 3. Intégration avec Spring Security
+    ### a) UserDetailServiceImpl
+     - Implémente l’interface UserDetailsService de Spring Security.
+
+    -  Utilise AccountService pour récupérer un utilisateur par son nom.
+
+    - Convertit l’entité AppUser en UserDetails utilisable par Spring Security.
+
+    -  Les rôles sont extraits et passés sous forme de tableau pour être utilisés dans la sécurité.
+   
+    ### b) SecurityConfig
+
+      - Configure Spring Security.
+
+      - Définit que toutes les requêtes (sauf /webjars/**) nécessitent une authentification.
+
+      - Personnalise la page de login et la redirection en cas de succès.
+
+      - Définit une page d’accès refusé personnalisée (/notAuthorized).
+
+       -  le UserDetailsService personnalisé qui s’appuie sur la base de données.
+   
+    ## 4. Chargement initial des données (CommandLineRunner)
+    Le bean commandLineRunnerUserDetails initialise la base de données avec des rôles et des utilisateurs par défaut :
+    - Crée les rôles USER et ADMIN.
+
+    - Crée trois utilisateurs avec leurs mots de passe (chiffrés dans AccountServiceImpl).
+
+    - Attribue les rôles adéquats à chaque utilisateur.
+
+    ## login avec Admin
+    ![image](https://github.com/user-attachments/assets/88dec010-ea55-4d0f-9332-60ff5d86c410)
+
+    ## login avec User1:
+    ![image](https://github.com/user-attachments/assets/02a15ac9-deff-4353-9be9-01a1eb46d8a6)
+
+    ## Table appUser :
+    ![image](https://github.com/user-attachments/assets/37b7e4eb-70d6-4364-958c-4ee9a4dcc6bf)
+
+    ## Table appRole
+    ![image](https://github.com/user-attachments/assets/314ec008-d5fe-4569-a7c5-1fe654ff1ef6)
+
+    ## Table app_user -roles
+
+    ![image](https://github.com/user-attachments/assets/d273c83e-5747-4772-bfba-3a3cec01eb7b)
+
+
+    
+
+
+
+
+
+ 
+
+
 
 
 
